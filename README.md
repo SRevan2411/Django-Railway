@@ -34,4 +34,5 @@ Modular Backend
 1. En la terminal de VSCode ingresar los siguientes comandos
    - cd BackEndDjangoRest
    - python manage.py runserver
+
 **NOTA:** Para apagar el servidor pulsar _CTRL + C_
