@@ -25,5 +25,7 @@ Modular Backend
 
 ### Paso 3: Instalar dependencias
 
-1. Ingresa los siguientes comandos: - cd BackendDjangoRest - pip install -r requirements.txt
-   **nota** cada que instales una nueva librería usar el siguiente comando: _pip freeze > requirements.txt_
+1. Ingresa los siguientes comandos:
+   - cd BackendDjangoRest
+   - pip install -r requirements.txt
+     **nota** cada que instales una nueva librería usar el siguiente comando: _pip freeze > requirements.txt_
