@@ -27,5 +27,5 @@ Modular Backend
 
 1. Ingresa los siguientes comandos:
    - cd BackendDjangoRest
-   - pip install -r requirements.txt
+   - pip install -r requirements.txt  
      **nota** cada que instales una nueva librería usar el siguiente comando: _pip freeze > requirements.txt_
