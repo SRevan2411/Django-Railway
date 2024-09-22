@@ -13,8 +13,9 @@ class UserManager(BaseUserManager):
             raise ValueError("User must have a name")
         user = self.model(
             email = self.normalize_email(email), #Normalizar = ExaMple@mail.com -> example@mail.com
-            name = self.name,
+            name = name,
             nickname = nickname
+           
         )
         #usamos un metodo para que se cifre el password
         user.set_password(password)
