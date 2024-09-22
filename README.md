@@ -29,3 +29,10 @@ Modular Backend
    - cd BackendDjangoRest
    - pip install -r requirements.txt  
      **nota** cada que instales una nueva librería usar el siguiente comando: _pip freeze > requirements.txt_
+
+### Paso 4: Iniciar el servidor
+1. En la terminal de VSCode ingresar los siguientes comandos
+   - cd BackEndDjangoRest
+   - python manage.py runserver
+
+**NOTA:** Para apagar el servidor pulsar _CTRL + C_
