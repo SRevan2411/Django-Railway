@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import User
+from .models import Course
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True) #Evitamos que se retorne este campo al crear el usuario
@@ -19,3 +20,9 @@ class UserSerializer(serializers.ModelSerializer):
         )
         return user
     
+
+class CourseSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Course
+        fields = ['id', 'title', 'subject', 'description', 'user']
+        read_only_fields = ['user']

@@ -1,9 +1,10 @@
 from django.urls import path
-from .views import RegisterView,LoginView,GetUserProfileView
+from .views import RegisterView,LoginView,GetUserProfileView,CourseCreateView
 
 urlpatterns = [
     path('register/',RegisterView.as_view(),name='register'),
     path('login/',LoginView.as_view(),name='login'),
     path('profile/',GetUserProfileView.as_view(),name='profile'),
+    path('courses/create/', CourseCreateView.as_view(), name='course-create'),  # Crear curso
 
 ]

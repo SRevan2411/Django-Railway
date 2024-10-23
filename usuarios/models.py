@@ -45,4 +45,13 @@ class User(AbstractBaseUser):
     def __str__(self):
         return self.email
     
+class Course(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+    title = models.CharField(max_length=255)
+    subject = models.CharField(max_length=100) #Tema
+    description = models.TextField()
+
+    def __str__(self):
+        return self.title
+    
 
