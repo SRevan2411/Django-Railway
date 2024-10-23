@@ -3,10 +3,13 @@ from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer
+from .serializers import CourseSerializer
+from .models import Course
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
 
 # Create your views here.
 
@@ -46,3 +49,12 @@ class GetUserProfileView(APIView):
     def get(self,request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+    
+
+class CourseCreateView(generics.CreateAPIView):
+    serializer_class = CourseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        serializer.save(user=self.request.user)
