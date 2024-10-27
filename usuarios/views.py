@@ -58,3 +58,12 @@ class CourseCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class CourseListView(generics.ListAPIView):
+    serializer_class = CourseSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        # Lista los cursos solo del usuario autenticado
+        return Course.objects.filter(user=self.request.user)
