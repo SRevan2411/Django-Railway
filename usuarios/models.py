@@ -6,16 +6,20 @@ from django.db import models
 #Clase user manager (contiene metodos utiles como cifrado de password)
 class UserManager(BaseUserManager):
     #password=None, usamos esto en caso de que el usuario pase a inactivo
-    def create_user(self,name,nickname,email,password = None):
+    def create_user(self,name,nickname,email, Picture, XP=0, lvl=0, password = None):
         if not email:
             raise ValueError("User must have an email")
         if not name:
             raise ValueError("User must have a name")
+        if not Picture:
+            None
         user = self.model(
             email = self.normalize_email(email), #Normalizar = ExaMple@mail.com -> example@mail.com
             name = name,
-            nickname = nickname
-           
+            nickname = nickname,
+            XP = XP,
+            lvl = lvl,
+            Picture = Picture,
         )
         #usamos un metodo para que se cifre el password
         user.set_password(password)
@@ -24,7 +28,7 @@ class UserManager(BaseUserManager):
     
     #Clase para super usuarios
     def create_superuser(self,name,nickname,email,password=None):
-        user = self.create_user(name,nickname,email,password)
+        user = self.create_user(name,nickname,email,password, XP=0, lvl=1)
         user.is_admin = True
         user.save(using = self._db)
         return user
@@ -36,6 +40,10 @@ class User(AbstractBaseUser):
     nickname = models.CharField(max_length=100,unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+
+    XP = models.IntegerField(default = 0)
+    lvl = models.IntegerField(default = 0)
+    Picture=models.URLField(max_length=500, blank=True, null=True)
 
     objects = UserManager()
 
@@ -54,4 +62,13 @@ class Course(models.Model):
     def __str__(self):
         return self.title
     
+<<<<<<< Updated upstream
+=======
+class Video(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='resources') #Relacion con el curso
+    title = models.CharField(max_length=255)
+    description = models.TextField()
+    video_url = models.URLField()
+    uploaded_at = models.DateTimeField(default=timezone.now)
+>>>>>>> Stashed changes
 

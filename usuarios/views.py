@@ -2,16 +2,21 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.views import APIView
+<<<<<<< Updated upstream
 from .serializers import UserSerializer
 from .serializers import CourseSerializer
 from .models import Course
+=======
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer
+from .models import Course, Video, User
+>>>>>>> Stashed changes
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
 
-# Create your views here.
+# Usuarios --------------------------------------------------------------------------------------
 
 class RegisterView(APIView):
     def post(self,request):
@@ -50,6 +55,15 @@ class GetUserProfileView(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
     
+class UserProfileDetailView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Devuelve directamente el usuario autenticado
+        return self.request.user
+# Cursos -------------------------------------------------------------------------------------        
 
 class CourseCreateView(generics.CreateAPIView):
     serializer_class = CourseSerializer
@@ -66,4 +80,58 @@ class CourseListView(generics.ListAPIView):
 
     def get_queryset(self):
         # Lista los cursos solo del usuario autenticado
+<<<<<<< Updated upstream
         return Course.objects.filter(user=self.request.user)
+=======
+        return Course.objects.filter(user=self.request.user)
+
+#Videos / Recursos ---------------------------------------------------------------------------
+
+class ResourceCreateView(generics.CreateAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        course_id = self.kwargs['course_id']  # Obtenemos el curso de la URL
+        course = Course.objects.get(id=course_id)  # Asegúrate de tener el curso
+        serializer.save(course=course)
+
+class VideoListView(generics.ListAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']  # Obtiene el `course_id` de la URL
+        return Video.objects.filter(course_id=course_id)
+    
+class ResourceUpdateView(generics.UpdateAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return Video.objects.filter(course__id=course_id, course__user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+
+class ResourceDeleteView(generics.DestroyAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return Video.objects.filter(course__id=course_id, course__user=self.request.user)
+
+    def perform_destroy(self, instance):
+        instance.delete()
+>>>>>>> Stashed changes
