@@ -1,6 +1,10 @@
-from rest_framework import serializers
+from rest_framework import serializers, status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
 from .models import User
-from .models import Course
+from .models import Course, Video
+from firebase_admin import storage
+from datetime import timedelta
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True) #Evitamos que se retorne este campo al crear el usuario
@@ -26,9 +30,6 @@ class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ['id', 'title', 'subject', 'description', 'user']
-<<<<<<< Updated upstream
-        read_only_fields = ['user']
-=======
         read_only_fields = ['user']
 
 class ResourceSerializer(serializers.ModelSerializer):
@@ -43,4 +44,3 @@ class ResourceSerializer(serializers.ModelSerializer):
             # Hacer `video_url` de solo lectura para las solicitudes de edición
             fields['video_url'].read_only = True
         return fields
->>>>>>> Stashed changes

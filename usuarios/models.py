@@ -1,5 +1,6 @@
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 from django.db import models
+from django.utils import timezone
 
 # Create your models here.
 
@@ -62,13 +63,12 @@ class Course(models.Model):
     def __str__(self):
         return self.title
     
-<<<<<<< Updated upstream
-=======
 class Video(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='resources') #Relacion con el curso
     title = models.CharField(max_length=255)
     description = models.TextField()
     video_url = models.URLField()
     uploaded_at = models.DateTimeField(default=timezone.now)
->>>>>>> Stashed changes
 
+    def __str__(self):
+        return self.title

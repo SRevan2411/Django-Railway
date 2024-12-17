@@ -1,20 +1,17 @@
 from django.shortcuts import render
 from rest_framework import status
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-<<<<<<< Updated upstream
-from .serializers import UserSerializer
-from .serializers import CourseSerializer
-from .models import Course
-=======
 from .serializers import UserSerializer, CourseSerializer, ResourceSerializer
 from .models import Course, Video, User
->>>>>>> Stashed changes
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
+from firebase_admin import storage
+from datetime import timedelta
 
 # Usuarios --------------------------------------------------------------------------------------
 
@@ -80,9 +77,6 @@ class CourseListView(generics.ListAPIView):
 
     def get_queryset(self):
         # Lista los cursos solo del usuario autenticado
-<<<<<<< Updated upstream
-        return Course.objects.filter(user=self.request.user)
-=======
         return Course.objects.filter(user=self.request.user)
 
 #Videos / Recursos ---------------------------------------------------------------------------
@@ -134,4 +128,3 @@ class ResourceDeleteView(generics.DestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.delete()
->>>>>>> Stashed changes
