@@ -12,7 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
     #Definir que modelo se va a serializar y que campos se necesitan
     class Meta:
         model = User
-        fields = ['email','name','nickname','password','Picture']
+        fields = ['email','name','nickname','password','Picture','XP','lvl']
 
     #Metodo que se llama cuando el serializer recibe los datos
     def create(self,validated_data):

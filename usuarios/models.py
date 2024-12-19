@@ -28,9 +28,11 @@ class UserManager(BaseUserManager):
         return user
     
     #Clase para super usuarios
-    def create_superuser(self,name,nickname,email,password=None):
-        user = self.create_user(name,nickname,email,password, XP=0, lvl=1)
+    def create_superuser(self,name,email,password=None):
+        user = self.create_user(name,name,email,'Defaulturl', XP=0, lvl=1,password=password)
         user.is_admin = True
+        user.is_staff = True  # Importante para acceder al panel de administración
+        user.is_superuser = True  # Otorga permisos de superusuario
         user.save(using = self._db)
         return user
     
@@ -41,6 +43,8 @@ class User(AbstractBaseUser):
     nickname = models.CharField(max_length=100,unique=True)
     is_active = models.BooleanField(default=True)
     is_admin = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=False)
+    is_superuser = models.BooleanField(default=False)
 
     XP = models.IntegerField(default = 0)
     lvl = models.IntegerField(default = 0)
@@ -51,8 +55,16 @@ class User(AbstractBaseUser):
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['name']
 
+
     def __str__(self):
         return self.email
+    def has_perm(self, perm, obj=None):
+        """Indica si el usuario tiene un permiso específico."""
+        return True
+
+    def has_module_perms(self, app_label):
+        """Indica si el usuario tiene permisos para ver una app específica."""
+        return True
     
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
