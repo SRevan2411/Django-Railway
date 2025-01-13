@@ -10,6 +10,7 @@ from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
+from rest_framework.generics import ListAPIView
 from firebase_admin import storage
 from datetime import timedelta
 
@@ -78,6 +79,12 @@ class CourseListView(generics.ListAPIView):
     def get_queryset(self):
         # Lista los cursos solo del usuario autenticado
         return Course.objects.filter(user=self.request.user)
+    
+#Listado de todos los cursos sin iniciar sesión
+class CourseAllListView(ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    permission_classes = []
 
 #Videos / Recursos ---------------------------------------------------------------------------
 
