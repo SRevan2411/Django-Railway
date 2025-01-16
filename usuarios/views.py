@@ -86,6 +86,34 @@ class CourseAllListView(ListAPIView):
     serializer_class = CourseSerializer
     permission_classes = []
 
+#Retorna la información del curso por ID, junto a sus videos
+class CourseDetails(ListAPIView):
+    def get(self,request,course_id):
+        try:
+            #si el id hace match obtenemos el objeto
+            course = Course.objects.get(id = course_id)
+        except Course.DoesNotExist:
+            #si no, devolvemos un error
+            return Response(
+                {"error": "Course not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        #serializamos el objeto (convierte el object a formato JSON)
+        course_serializer = CourseSerializer(course)
+        #Obtenemos los recursos
+        resources = Video.objects.filter(course = course)
+        #Serializamos los recursos
+        resources_serializer = ResourceSerializer(resources, many=True, context={"request": request})
+        #Encapsulamos los datos
+        data = {
+            "course": course_serializer.data,
+            "resource": resources_serializer.data
+        }
+        #retornamos los datos
+        return Response(data, status=status.HTTP_200_OK)
+
+        
+
 #Videos / Recursos ---------------------------------------------------------------------------
 
 class ResourceCreateView(generics.CreateAPIView):
