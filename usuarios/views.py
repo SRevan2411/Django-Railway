@@ -4,6 +4,7 @@ from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from .serializers import UserSerializer, CourseSerializer, ResourceSerializer
+from .filters import CourseFilter
 from .models import Course, Video, User
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -13,6 +14,7 @@ from rest_framework import generics
 from rest_framework.generics import ListAPIView
 from firebase_admin import storage
 from datetime import timedelta
+from django_filters.rest_framework import DjangoFilterBackend
 
 # Usuarios --------------------------------------------------------------------------------------
 
@@ -84,6 +86,8 @@ class CourseListView(generics.ListAPIView):
 class CourseAllListView(ListAPIView):
     queryset = Course.objects.all()
     serializer_class = CourseSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = CourseFilter
     permission_classes = []
 
 #Retorna la información del curso por ID, junto a sus videos
