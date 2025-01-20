@@ -3,9 +3,9 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CourseSerializer, ResourceSerializer
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer
 from .filters import CourseFilter
-from .models import Course, Video, User
+from .models import Course, Video, User, Like
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
@@ -81,6 +81,21 @@ class CourseListView(generics.ListAPIView):
     def get_queryset(self):
         # Lista los cursos solo del usuario autenticado
         return Course.objects.filter(user=self.request.user)
+
+    def get(self, request):
+        courses = Course.objects.all()
+
+        data = [
+            {
+                "id": course.id,
+                "title": course.title,
+                "description": course.description,
+                "total_likes": Like.objects.filter(video__course=course).count(),
+            }
+            for course in courses
+        ]
+
+        return Response(data, status=200)
     
 #Listado de todos los cursos sin iniciar sesión
 class CourseAllListView(ListAPIView):
@@ -138,6 +153,22 @@ class VideoListView(generics.ListAPIView):
     def get_queryset(self):
         course_id = self.kwargs['course_id']  # Obtiene el `course_id` de la URL
         return Video.objects.filter(course_id=course_id)
+
+    def get(self, request, course_id):
+        videos = Video.objects.filter(course_id=course_id)
+        user = request.user
+
+        # Construimos la respuesta con el estado 'liked' para cada video
+        data = [
+            {
+                "id": video.id,
+                "title": video.title,
+                "description": video.description,
+                "liked": Like.objects.filter(video=video, user=user).exists(),
+            }
+            for video in videos
+        ]
+        return Response(data, status=200)
     
 class ResourceUpdateView(generics.UpdateAPIView):
     serializer_class = ResourceSerializer
@@ -167,3 +198,87 @@ class ResourceDeleteView(generics.DestroyAPIView):
 
     def perform_destroy(self, instance):
         instance.delete()
+
+class LikeToggleView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request, video_id):
+        try:
+            # Buscar o crear el like para el usuario y el video especificado
+            video = Video.objects.get(id=video_id)
+            like, created = Like.objects.get_or_create(video=video, user=request.user)
+
+            if not created:  # Si el like ya existía, lo eliminamos
+                like.delete()
+                return Response({"message": "Like removed", "liked": False}, status=status.HTTP_200_OK)
+
+            # Si se creó un nuevo like, devolvemos una respuesta
+            return Response({"message": "Like added", "liked": True}, status=status.HTTP_201_CREATED)
+
+        except Video.DoesNotExist:
+            return Response({"error": "Video no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+    def delete(self, request, video_id):
+        try:
+            # Verificar si el like existe
+            like = Like.objects.get(video_id=video_id, user=request.user)
+            like.delete()  # Eliminar el like
+
+            return Response({"message": "Like removed"}, status=200)
+
+        except Like.DoesNotExist:
+            return Response({"error": "Like not found"}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=500)
+
+class VideoLikesCountView(APIView):
+    def get(self, request, video_id):
+        try:
+            # Verifica si el video existe
+            video = Video.objects.get(id=video_id)
+            
+            # Cuenta los likes relacionados con el video
+            total_likes = Like.objects.filter(video=video).count()
+            
+            return Response({"video_id": video.id, "total_likes": total_likes}, status=status.HTTP_200_OK)
+
+        except Video.DoesNotExist:
+            return Response({"error": "Video not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class CourseLikesCountView(APIView):
+    def get(self, request, course_id):
+        try:
+            # Verifica si el curso existe
+            course = Course.objects.get(id=course_id)
+            
+            # Filtra los likes de los videos asociados al curso
+            total_likes = Like.objects.filter(video__course=course).count()
+            
+            return Response({"course_id": course.id, "total_likes": total_likes}, status=status.HTTP_200_OK)
+
+        except Course.DoesNotExist:
+            return Response({"error": "Course not found"}, status=status.HTTP_404_NOT_FOUND)
+        except Exception as e:
+            return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+        
+class UserVideoLikesView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        # Obtener los IDs de videos desde el query params
+        video_ids = request.query_params.getlist('video_ids')
+
+        # Obtener los likes del usuario autenticado
+        user_likes = Like.objects.filter(user=request.user, video_id__in=video_ids).values_list('video_id', flat=True)
+
+        # Formatear la respuesta indicando si hay like o no
+        response_data = {video_id: video_id in user_likes for video_id in map(int, video_ids)}
+        
+        return Response(response_data, status=200)

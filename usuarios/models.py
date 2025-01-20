@@ -84,3 +84,14 @@ class Video(models.Model):
 
     def __str__(self):
         return self.title
+
+class Like(models.Model):
+    video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="likes")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('video', 'user')  # Garantiza que un usuario no dé más de un like a un video
+
+    def __str__(self):
+        return f"Like by {self.user.email} on {self.video.title}"
