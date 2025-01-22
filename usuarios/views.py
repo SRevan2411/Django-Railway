@@ -1,17 +1,22 @@
 from django.shortcuts import render
 from rest_framework import status
+from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer
-from .serializers import CourseSerializer
-from .models import Course
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer
+from .filters import CourseFilter
+from .models import Course, Video, User
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import generics
+from rest_framework.generics import ListAPIView
+from firebase_admin import storage
+from datetime import timedelta
+from django_filters.rest_framework import DjangoFilterBackend
 
-# Create your views here.
+# Usuarios --------------------------------------------------------------------------------------
 
 class RegisterView(APIView):
     def post(self,request):
@@ -50,6 +55,15 @@ class GetUserProfileView(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
     
+class UserProfileDetailView(generics.RetrieveAPIView):
+    serializer_class = UserSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+        # Devuelve directamente el usuario autenticado
+        return self.request.user
+# Cursos -------------------------------------------------------------------------------------        
 
 class CourseCreateView(generics.CreateAPIView):
     serializer_class = CourseSerializer
@@ -67,3 +81,89 @@ class CourseListView(generics.ListAPIView):
     def get_queryset(self):
         # Lista los cursos solo del usuario autenticado
         return Course.objects.filter(user=self.request.user)
+    
+#Listado de todos los cursos sin iniciar sesión
+class CourseAllListView(ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_class = CourseFilter
+    permission_classes = []
+
+#Retorna la información del curso por ID, junto a sus videos
+class CourseDetails(ListAPIView):
+    def get(self,request,course_id):
+        try:
+            #si el id hace match obtenemos el objeto
+            course = Course.objects.get(id = course_id)
+        except Course.DoesNotExist:
+            #si no, devolvemos un error
+            return Response(
+                {"error": "Course not found"},
+                status=status.HTTP_404_NOT_FOUND
+            )
+        #serializamos el objeto (convierte el object a formato JSON)
+        course_serializer = CourseSerializer(course)
+        #Obtenemos los recursos
+        resources = Video.objects.filter(course = course)
+        #Serializamos los recursos
+        resources_serializer = ResourceSerializer(resources, many=True, context={"request": request})
+        #Encapsulamos los datos
+        data = {
+            "course": course_serializer.data,
+            "resource": resources_serializer.data
+        }
+        #retornamos los datos
+        return Response(data, status=status.HTTP_200_OK)
+
+        
+
+#Videos / Recursos ---------------------------------------------------------------------------
+
+class ResourceCreateView(generics.CreateAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def perform_create(self, serializer):
+        course_id = self.kwargs['course_id']  # Obtenemos el curso de la URL
+        course = Course.objects.get(id=course_id)  # Asegúrate de tener el curso
+        serializer.save(course=course)
+
+class VideoListView(generics.ListAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']  # Obtiene el `course_id` de la URL
+        return Video.objects.filter(course_id=course_id)
+    
+class ResourceUpdateView(generics.UpdateAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return Video.objects.filter(course__id=course_id, course__user=self.request.user)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+
+class ResourceDeleteView(generics.DestroyAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    lookup_field = 'id'
+
+    def get_queryset(self):
+        course_id = self.kwargs['course_id']
+        return Video.objects.filter(course__id=course_id, course__user=self.request.user)
+
+    def perform_destroy(self, instance):
+        instance.delete()
