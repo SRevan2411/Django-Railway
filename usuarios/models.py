@@ -66,6 +66,7 @@ class User(AbstractBaseUser):
         """Indica si el usuario tiene permisos para ver una app específica."""
         return True
     
+#Modelo correspondiente para la tabla de los cursos
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
     title = models.CharField(max_length=255)
@@ -74,7 +75,8 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-    
+
+#Modelo correspondiente para la tabla de los recursos (videos del curso)   
 class Video(models.Model):
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='resources') #Relacion con el curso
     title = models.CharField(max_length=255)
@@ -85,6 +87,7 @@ class Video(models.Model):
     def __str__(self):
         return self.title
 
+#Modelo correspondiente para la tabla Likes (lIKES del curso)
 class Like(models.Model):
     video = models.ForeignKey(Video, on_delete=models.CASCADE, related_name="likes")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -95,3 +98,15 @@ class Like(models.Model):
 
     def __str__(self):
         return f"Like by {self.user.email} on {self.video.title}"
+
+#Modelo correspondiente para la tabla historial (historial del usuario)
+class history(models.Model):
+    video = models.ForeignKey(Video,on_delete=models.CASCADE, related_name="history")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    visited_at = models.DateTimeField(default=timezone.now)
+
+    class Meta:
+        unique_together = ('video', 'user') #solo registramos una sola vez el video al historial
+
+    def __str__(self):
+        return f"Video {self.video.title} was visited by {self.user.email}"
