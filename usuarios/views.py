@@ -3,9 +3,9 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer
 from .filters import CourseFilter
-from .models import Course, Video, User, Like
+from .models import Course, Video, User, Like, History
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
@@ -199,6 +199,7 @@ class ResourceDeleteView(generics.DestroyAPIView):
     def perform_destroy(self, instance):
         instance.delete()
 
+#SISTEMA DE LIKES
 class LikeToggleView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -282,3 +283,36 @@ class UserVideoLikesView(APIView):
         response_data = {video_id: video_id in user_likes for video_id in map(int, video_ids)}
         
         return Response(response_data, status=200)
+    
+
+#SISTEMA DE HISTORIAL
+class UserHistoryView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+        #serializamos los datos
+        serializer = HistorySerializer(data=request.data)
+        
+        if serializer.is_valid():
+            video_id = serializer.validated_data['video']
+            try:
+                # Checar si el video existe
+                video = Video.objects.get(id=video_id.id)
+
+                # usar get or create para ver si ya existe la entrada al historial
+                history_entry, created = History.objects.get_or_create(video=video,user=request.user)
+
+                if created:
+                    # Serializar el objeto creado para devolverlo como respuesta
+                    response_serializer = HistorySerializer(history_entry)
+                    return Response(response_serializer.data, status=status.HTTP_201_CREATED)
+                else:
+                    return Response(
+                        {"message": "Video already in history"}, status=status.HTTP_200_OK
+                    )
+            except Video.DoesNotExist:
+                return Response({"error": "Video not found"}, status=status.HTTP_404_NOT_FOUND)
+        else:
+            return Response({"error":"bad request"},status=status.HTTP_400_BAD_REQUEST)
+        

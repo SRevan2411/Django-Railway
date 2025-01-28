@@ -100,7 +100,7 @@ class Like(models.Model):
         return f"Like by {self.user.email} on {self.video.title}"
 
 #Modelo correspondiente para la tabla historial (historial del usuario)
-class history(models.Model):
+class History(models.Model):
     video = models.ForeignKey(Video,on_delete=models.CASCADE, related_name="history")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     visited_at = models.DateTimeField(default=timezone.now)
