@@ -165,6 +165,8 @@ class VideoListView(generics.ListAPIView):
                 "title": video.title,
                 "description": video.description,
                 "liked": Like.objects.filter(video=video, user=user).exists(),
+                "uploaded_at": video.uploaded_at,
+                "video_url": video.video_url,
             }
             for video in videos
         ]
