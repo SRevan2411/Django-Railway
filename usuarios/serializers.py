@@ -2,9 +2,10 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import User
-from .models import Course, Video
+from .models import Course, Video, Like, History
 from firebase_admin import storage
 from datetime import timedelta
+from django.db.models import Count
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only = True) #Evitamos que se retorne este campo al crear el usuario
@@ -27,10 +28,16 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 class CourseSerializer(serializers.ModelSerializer):
+    total_likes = serializers.SerializerMethodField()
+
     class Meta:
         model = Course
-        fields = ['id', 'title', 'subject', 'description', 'user']
+        fields = ['id', 'title', 'subject', 'description', 'user', 'total_likes']
         read_only_fields = ['user']
+    
+    def get_total_likes(self, obj):
+        # Calcular la suma de likes de todos los videos relacionados con este curso
+        return obj.resources.aggregate(total_likes=Count('likes'))['total_likes'] or 0
 
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,3 +51,15 @@ class ResourceSerializer(serializers.ModelSerializer):
             # Hacer `video_url` de solo lectura para las solicitudes de edición
             fields['video_url'].read_only = True
         return fields
+
+class LikeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Like
+        fields = ['id', 'video', 'user', 'created_at']
+        read_only_fields = ['user', 'created_at']
+
+class HistorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = History
+        fields = ['id', 'video', 'user', 'visited_at']
+        read_only_fields = ['user', 'visited_at']
