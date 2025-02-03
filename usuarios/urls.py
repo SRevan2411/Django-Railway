@@ -23,5 +23,5 @@ urlpatterns = [
     path('videos/<int:video_id>/likes/count/', VideoLikesCountView.as_view(), name='video-likes-count'),
     path('courses/<int:course_id>/likes/count/', CourseLikesCountView.as_view(), name='course-likes-count'),
     path('api/add_to_history/', UserHistoryView.as_view(), name='add_to_history'),
-
+    
 ]
