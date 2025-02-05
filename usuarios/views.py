@@ -318,3 +318,14 @@ class UserHistoryView(APIView):
         else:
             return Response({"error":"bad request"},status=status.HTTP_400_BAD_REQUEST)
         
+class UserHistoryGetView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self,request):
+        usuario = request.user
+        historial = History.objects.filter(user = usuario).select_related('video') #carga los datos de los videos en la misma consulta
+        #obtenemos la lista de los videos 
+        videoList = [entry.video for entry in historial]
+        serializer = ResourceSerializer(videoList, many=True, context={'request': request})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
