@@ -1,6 +1,6 @@
 from django.urls import path
-from .views import UserHistoryView,RegisterView,LoginView,GetUserProfileView,CourseCreateView,CourseDetails,CourseAllListView,CourseListView, ResourceCreateView, VideoListView, ResourceUpdateView, ResourceDeleteView, UserProfileDetailView, LikeToggleView, VideoLikesCountView, CourseLikesCountView
-
+#from .views import UserHistoryView,RegisterView,LoginView,GetUserProfileView,CourseCreateView,CourseDetails,CourseAllListView,CourseListView, ResourceCreateView, VideoListView, ResourceUpdateView, ResourceDeleteView, UserProfileDetailView, LikeToggleView, VideoLikesCountView, CourseLikesCountView
+from .views import *
 urlpatterns = [
     #Cosas del usuario
     path('register/',RegisterView.as_view(),name='register'),
@@ -22,6 +22,10 @@ urlpatterns = [
     path('videos/<int:video_id>/like/', LikeToggleView.as_view(), name='like-toggle'),
     path('videos/<int:video_id>/likes/count/', VideoLikesCountView.as_view(), name='video-likes-count'),
     path('courses/<int:course_id>/likes/count/', CourseLikesCountView.as_view(), name='course-likes-count'),
+    
+
+    #History stuff
+    path('history/',UserHistoryGetView.as_view(),name='userHistory'),
     path('api/add_to_history/', UserHistoryView.as_view(), name='add_to_history'),
     
 ]
