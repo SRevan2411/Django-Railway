@@ -10,8 +10,10 @@ urlpatterns = [
     #Cosas de los cursos
     path('courses/create/', CourseCreateView.as_view(), name='course-create'),  # Crear curso
     path('courses/list/', CourseListView.as_view(), name='course-list'),
+    path('courses/user/list', CourseUserListView.as_view(), name='user-course-list'),
     path('courses/<int:course_id>/videos/upload/', ResourceCreateView.as_view(), name='create_resource'),
     path('courses/<int:course_id>/videos/', VideoListView.as_view(), name='list_videos_by_course'),
+    path('courses/<int:course_id>/admin/', VideoAdminView.as_view(), name='list_videos_by_course'),
     path('courses/list/all/',CourseAllListView.as_view(),name='course-list-all'),
     path('courses/<int:course_id>/',CourseDetails.as_view(),name='courseDetails'),
 
@@ -26,6 +28,6 @@ urlpatterns = [
 
     #History stuff
     path('history/',UserHistoryGetView.as_view(),name='userHistory'),
-    path('api/add_to_history/', UserHistoryView.as_view(), name='add_to_history'),
+    path('add_to_history/', UserHistoryView.as_view(), name='add_to_history'),
     
 ]

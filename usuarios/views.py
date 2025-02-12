@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
@@ -15,6 +15,7 @@ from rest_framework.generics import ListAPIView
 from firebase_admin import storage
 from datetime import timedelta
 from django_filters.rest_framework import DjangoFilterBackend
+
 
 # Usuarios --------------------------------------------------------------------------------------
 
@@ -72,6 +73,17 @@ class CourseCreateView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
+
+class CourseUserListView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        usuario = request.user
+        cursos = Course.objects.filter(user = usuario)
+        serializer = CourseSerializer(cursos, many = True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
 
 class CourseListView(generics.ListAPIView):
     serializer_class = CourseSerializer
@@ -144,6 +156,35 @@ class ResourceCreateView(generics.CreateAPIView):
         course_id = self.kwargs['course_id']  # Obtenemos el curso de la URL
         course = Course.objects.get(id=course_id)  # Asegúrate de tener el curso
         serializer.save(course=course)
+
+class VideoAdminView(generics.ListAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        user = self.request.user
+        course_id = self.kwargs['course_id']
+        course = get_object_or_404(Course, id= course_id, user = user)
+        return Video.objects.filter(course= course)
+    def get(self, request, course_id):
+        user = request.user
+        course = get_object_or_404(Course, id=course_id, user=user)  # Verificación de propiedad
+
+        videos = Video.objects.filter(course=course)
+        data = [
+            {
+                "id": video.id,
+                "title": video.title,
+                "description": video.description,
+                "liked": Like.objects.filter(video=video, user=user).exists(),
+                "uploaded_at": video.uploaded_at,
+                "video_url": video.video_url,
+            }
+            for video in videos
+        ]
+        return Response(data, status=200)
+
 
 class VideoListView(generics.ListAPIView):
     serializer_class = ResourceSerializer
