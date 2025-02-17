@@ -66,8 +66,10 @@ class HistorySerializer(serializers.ModelSerializer):
 
 #Serializador para comentarios
 class CommentSerializer(serializers.ModelSerializer):
+    nickname = serializers.SerializerMethodField()
     class Meta:
         model = Comment
-        fields = ['id','user','video','created_at','content']
-        
+        fields = ['id','user','nickname','video','created_at','content']
+    def get_nickname(self,obj):
+        return obj.user.nickname
 
