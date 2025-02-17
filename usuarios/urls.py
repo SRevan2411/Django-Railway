@@ -26,8 +26,13 @@ urlpatterns = [
     path('courses/<int:course_id>/likes/count/', CourseLikesCountView.as_view(), name='course-likes-count'),
     
 
-    #History stuff
+    #URLS de Historial
     path('history/',UserHistoryGetView.as_view(),name='userHistory'),
     path('add_to_history/', UserHistoryView.as_view(), name='add_to_history'),
+
+
+    #URLS de Comentarios
+    path('videos/<int:video_id>/comments/',CommentListView.as_view(),name='getComments'),
+    path('videos/<int:video_id>/comments/create',CommentCreateView.as_view(),name='createComment'),
     
 ]

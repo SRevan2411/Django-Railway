@@ -110,3 +110,15 @@ class History(models.Model):
 
     def __str__(self):
         return f"Video {self.video.title} was visited by {self.user.email}"
+    
+#Modelo utilizado para los comentarios
+
+class Comment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    video = models.ForeignKey(Video, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    content = models.TextField()
+
+    class Meta:
+        ordering = ['created_at']
+    

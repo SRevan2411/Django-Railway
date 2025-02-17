@@ -3,9 +3,9 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer,CommentSerializer
 from .filters import CourseFilter
-from .models import Course, Video, User, Like, History
+from .models import Course, Video, User, Like, History,Comment
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
@@ -358,7 +358,8 @@ class UserHistoryView(APIView):
                 return Response({"error": "Video not found"}, status=status.HTTP_404_NOT_FOUND)
         else:
             return Response({"error":"bad request"},status=status.HTTP_400_BAD_REQUEST)
-        
+
+#Obtener el historial del usuario        
 class UserHistoryGetView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
@@ -369,4 +370,27 @@ class UserHistoryGetView(APIView):
         videoList = [entry.video for entry in historial]
         serializer = ResourceSerializer(videoList, many=True, context={'request': request})
         return Response(serializer.data, status=status.HTTP_200_OK)
-    
+
+#View para crear un comentario
+
+class CommentCreateView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self,request,video_id):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        data['video'] = video_id
+        serializer = CommentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+
+#View para obtener los comentarios
+
+class CommentListView(APIView):
+    def get(self,request,video_id):
+        related_video = get_object_or_404(Video,id=video_id)
+        comments = Comment.objects.filter(video = related_video)
+        serializer = CommentSerializer(comments,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
