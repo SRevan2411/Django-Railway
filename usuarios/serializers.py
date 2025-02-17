@@ -2,7 +2,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import User
-from .models import Course, Video, Like, History
+from .models import Course, Video, Like, History, Comment
 from firebase_admin import storage
 from datetime import timedelta
 from django.db.models import Count
@@ -63,3 +63,11 @@ class HistorySerializer(serializers.ModelSerializer):
         model = History
         fields = ['id', 'video', 'user', 'visited_at']
         read_only_fields = ['user', 'visited_at']
+
+#Serializador para comentarios
+class CommentSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comment
+        fields = ['id','user','video','created_at','content']
+        
+
