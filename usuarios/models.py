@@ -72,6 +72,7 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     subject = models.CharField(max_length=100) #Tema
     description = models.TextField()
+    tag = models.TextField()
 
     def __str__(self):
         return self.title
