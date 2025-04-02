@@ -16,6 +16,8 @@ urlpatterns = [
     path('courses/<int:course_id>/admin/', VideoAdminView.as_view(), name='list_videos_by_course'),
     path('courses/list/all/',CourseAllListView.as_view(),name='course-list-all'),
     path('courses/<int:course_id>/',CourseDetails.as_view(),name='courseDetails'),
+    path('courses/<int:course_id>/delete',CourseDeleteView.as_view(),name='CourseDelete'),
+    path('courses/<int:course_id>/count',CourseVideoCountView.as_view(),name="CourseVideoCount"),
 
     path('courses/<int:course_id>/videos/<int:id>/update/', ResourceUpdateView.as_view(), name='update_resource'),
     path('courses/<int:course_id>/videos/<int:id>/delete/', ResourceDeleteView.as_view(), name='delete_resource'),
