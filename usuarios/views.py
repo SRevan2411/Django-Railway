@@ -153,7 +153,13 @@ class CourseDetails(ListAPIView):
         return Response(data, status=status.HTTP_200_OK)
 
         
-
+class CourseVideoCountView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def get(self,request,course_id):
+        course = get_object_or_404(Course,id=course_id)
+        video_count = Video.objects.filter(course=course).count()
+        return Response({"course_id":course.id,"video_count":video_count},status=status.HTTP_200_OK)
 #Videos / Recursos ---------------------------------------------------------------------------
 
 class ResourceCreateView(generics.CreateAPIView):
