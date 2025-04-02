@@ -74,6 +74,15 @@ class CourseCreateView(generics.CreateAPIView):
     def perform_create(self, serializer):
         serializer.save(user=self.request.user)
 
+class CourseDeleteView(APIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def delete(self, request, course_id):
+        course = get_object_or_404(Course,id=course_id, user = request.user)
+        course.delete()
+        return Response({"message":"Curso Eliminado de manera correcta"},status=status.HTTP_204_NO_CONTENT)
+
 class CourseUserListView(APIView):
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]

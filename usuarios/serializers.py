@@ -32,7 +32,7 @@ class CourseSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'subject', 'description', 'user', 'total_likes']
+        fields = ['id', 'title', 'subject', 'description','tag', 'user', 'total_likes']
         read_only_fields = ['user']
     
     def get_total_likes(self, obj):
