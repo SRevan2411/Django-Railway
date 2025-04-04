@@ -28,16 +28,19 @@ class UserSerializer(serializers.ModelSerializer):
     
 
 class CourseSerializer(serializers.ModelSerializer):
+    nickname = serializers.SerializerMethodField()
     total_likes = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = ['id', 'title', 'subject', 'description','tag', 'user', 'total_likes']
+        fields = ['id', 'title', 'subject', 'description','tag', 'user', 'total_likes','nickname']
         read_only_fields = ['user']
     
     def get_total_likes(self, obj):
         # Calcular la suma de likes de todos los videos relacionados con este curso
         return obj.resources.aggregate(total_likes=Count('likes'))['total_likes'] or 0
+    def get_nickname(self, obj):
+        return obj.user.nickname
 
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
