@@ -1,0 +1,1211 @@
+[
+  {
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+      "action_time": "2024-12-19T19:53:03.934Z",
+      "user": 12,
+      "content_type": 8,
+      "object_id": "7",
+      "object_repr": "test@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"XP\", \"Lvl\"]}}]"
+    }
+  },
+  {
+    "model": "admin.logentry",
+    "pk": 6,
+    "fields": {
+      "action_time": "2024-12-19T19:59:43.514Z",
+      "user": 12,
+      "content_type": 8,
+      "object_id": "7",
+      "object_repr": "test@gmail.com",
+      "action_flag": 2,
+      "change_message": "[{\"changed\": {\"fields\": [\"XP\"]}}]"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+      "name": "Can add log entry",
+      "content_type": 1,
+      "codename": "add_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+      "name": "Can change log entry",
+      "content_type": 1,
+      "codename": "change_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+      "name": "Can delete log entry",
+      "content_type": 1,
+      "codename": "delete_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+      "name": "Can view log entry",
+      "content_type": 1,
+      "codename": "view_logentry"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+      "name": "Can add permission",
+      "content_type": 2,
+      "codename": "add_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+      "name": "Can change permission",
+      "content_type": 2,
+      "codename": "change_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+      "name": "Can delete permission",
+      "content_type": 2,
+      "codename": "delete_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+      "name": "Can view permission",
+      "content_type": 2,
+      "codename": "view_permission"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+      "name": "Can add group",
+      "content_type": 3,
+      "codename": "add_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+      "name": "Can change group",
+      "content_type": 3,
+      "codename": "change_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+      "name": "Can delete group",
+      "content_type": 3,
+      "codename": "delete_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+      "name": "Can view group",
+      "content_type": 3,
+      "codename": "view_group"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+      "name": "Can add content type",
+      "content_type": 4,
+      "codename": "add_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+      "name": "Can change content type",
+      "content_type": 4,
+      "codename": "change_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+      "name": "Can delete content type",
+      "content_type": 4,
+      "codename": "delete_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+      "name": "Can view content type",
+      "content_type": 4,
+      "codename": "view_contenttype"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+      "name": "Can add session",
+      "content_type": 5,
+      "codename": "add_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+      "name": "Can change session",
+      "content_type": 5,
+      "codename": "change_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+      "name": "Can delete session",
+      "content_type": 5,
+      "codename": "delete_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+      "name": "Can view session",
+      "content_type": 5,
+      "codename": "view_session"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+      "name": "Can add Token",
+      "content_type": 6,
+      "codename": "add_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+      "name": "Can change Token",
+      "content_type": 6,
+      "codename": "change_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+      "name": "Can delete Token",
+      "content_type": 6,
+      "codename": "delete_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+      "name": "Can view Token",
+      "content_type": 6,
+      "codename": "view_token"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+      "name": "Can add Token",
+      "content_type": 7,
+      "codename": "add_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+      "name": "Can change Token",
+      "content_type": 7,
+      "codename": "change_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+      "name": "Can delete Token",
+      "content_type": 7,
+      "codename": "delete_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+      "name": "Can view Token",
+      "content_type": 7,
+      "codename": "view_tokenproxy"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+      "name": "Can add user",
+      "content_type": 8,
+      "codename": "add_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+      "name": "Can change user",
+      "content_type": 8,
+      "codename": "change_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+      "name": "Can delete user",
+      "content_type": 8,
+      "codename": "delete_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+      "name": "Can view user",
+      "content_type": 8,
+      "codename": "view_user"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+      "name": "Can add course",
+      "content_type": 9,
+      "codename": "add_course"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+      "name": "Can change course",
+      "content_type": 9,
+      "codename": "change_course"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+      "name": "Can delete course",
+      "content_type": 9,
+      "codename": "delete_course"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+      "name": "Can view course",
+      "content_type": 9,
+      "codename": "view_course"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+      "name": "Can add video",
+      "content_type": 10,
+      "codename": "add_video"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+      "name": "Can change video",
+      "content_type": 10,
+      "codename": "change_video"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+      "name": "Can delete video",
+      "content_type": 10,
+      "codename": "delete_video"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+      "name": "Can view video",
+      "content_type": 10,
+      "codename": "view_video"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+      "name": "Can add like",
+      "content_type": 11,
+      "codename": "add_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+      "name": "Can change like",
+      "content_type": 11,
+      "codename": "change_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+      "name": "Can delete like",
+      "content_type": 11,
+      "codename": "delete_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+      "name": "Can view like",
+      "content_type": 11,
+      "codename": "view_like"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+      "name": "Can add history",
+      "content_type": 12,
+      "codename": "add_history"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+      "name": "Can change history",
+      "content_type": 12,
+      "codename": "change_history"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+      "name": "Can delete history",
+      "content_type": 12,
+      "codename": "delete_history"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+      "name": "Can view history",
+      "content_type": 12,
+      "codename": "view_history"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+      "name": "Can add comment",
+      "content_type": 13,
+      "codename": "add_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+      "name": "Can change comment",
+      "content_type": 13,
+      "codename": "change_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+      "name": "Can delete comment",
+      "content_type": 13,
+      "codename": "delete_comment"
+    }
+  },
+  {
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+      "name": "Can view comment",
+      "content_type": 13,
+      "codename": "view_comment"
+    }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": { "app_label": "admin", "model": "logentry" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": { "app_label": "auth", "model": "permission" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": { "app_label": "auth", "model": "group" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": { "app_label": "contenttypes", "model": "contenttype" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": { "app_label": "sessions", "model": "session" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": { "app_label": "authtoken", "model": "token" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": { "app_label": "authtoken", "model": "tokenproxy" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": { "app_label": "usuarios", "model": "user" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": { "app_label": "usuarios", "model": "course" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": { "app_label": "usuarios", "model": "video" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": { "app_label": "usuarios", "model": "like" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": { "app_label": "usuarios", "model": "history" }
+  },
+  {
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": { "app_label": "usuarios", "model": "comment" }
+  },
+  {
+    "model": "sessions.session",
+    "pk": "z7dwkios61ls4u3k9n9heehf048czri4",
+    "fields": {
+      "session_data": ".eJxVjDsOwjAQBe_iGlnetfyjpOcM1q4_OIAcKU4qxN0hUgpo38y8l4i0rS1uoyxxyuIsAMXpd2RKj9J3ku_Ub7NMc1-XieWuyIMOeZ1zeV4O9--g0WjfWjPZYLVmgJyScw4ckQfSFT0kRAo2o6mWQHuP7KuqSrEKgRRYMka8P_bqN10:1tOMZl:p5RAcIDW98ldd2WI22RTpmXccQh2K-fUy_lFU8k7qqA",
+      "expire_date": "2025-01-02T19:52:49.413Z"
+    }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "3539f0963764f1705445d6aa34f88f51dffbf2c1",
+    "fields": { "user": 2, "created": "2024-09-16T18:28:48.207Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "3ca7e6a434320d844942db3af0437744f0c9998f",
+    "fields": { "user": 13, "created": "2025-02-12T19:25:14.987Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "88994089b5face02d660973430b38380398e16ce",
+    "fields": { "user": 5, "created": "2024-10-27T02:12:54.158Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "8e19eba774126749abf5b18978a4cfc201d08e94",
+    "fields": { "user": 4, "created": "2024-09-21T07:30:52.015Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "9a0791226edfbae81285719b9888010df4499f24",
+    "fields": { "user": 7, "created": "2024-12-19T18:48:07.452Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "9c99e24ae7273273b350ed8a6c020b00aba13548",
+    "fields": { "user": 1, "created": "2024-09-16T18:26:23.311Z" }
+  },
+  {
+    "model": "authtoken.token",
+    "pk": "b77f58afa8fdb214adc67da0273c8e48a9a0c224",
+    "fields": { "user": 3, "created": "2024-09-21T01:45:27.492Z" }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 1,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$kDz9qcELVQLEWLI1rWHDO1$FUk2qqHEJAfeApxBBP9sfNmwyBfmVOcgBXxKrcRh3lE=",
+      "last_login": null,
+      "email": "edu@gmail.com",
+      "name": "objects",
+      "nickname": "SRevan",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 2,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$zGwZ4nPy33VSCsEL8yLtzs$w26hkVrYSKa0kzhQsumwpocKdUe7Vdh4u17dwZSsO+c=",
+      "last_login": null,
+      "email": "example@mail.com",
+      "name": "objects",
+      "nickname": "TestUser",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 3,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$rEhNc1LPXc8R9zyP32mouf$T4MWVHMHzi/lHGJzlggIdiGtamdM+m8vrQrbWN/zIvY=",
+      "last_login": null,
+      "email": "exmail@mail.com",
+      "name": "objects",
+      "nickname": "betauser",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 4,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$evFvzAjcxfJT1c38fpaM6V$JGbTlcJBEKJgHaHmGfopyq9iXkqq2L7flPA407Ukw8Y=",
+      "last_login": null,
+      "email": "exmail2@mail.com",
+      "name": "eduardo",
+      "nickname": "newuser",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 5,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$uVBBeMduuoHp4CzOEGvXy7$KrHTSkUB0mZD/rylMkqUHdXiNS/jGP21LySj1U2tGCs=",
+      "last_login": null,
+      "email": "setuser@mail.com",
+      "name": "UserNew",
+      "nickname": "TestSubject",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 6,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$C1ow7C9FMerwklUgNVs3JY$SVd0q8LSDefOSWih4PLidL6cgLKQdHCe0z96guYmWhQ=",
+      "last_login": null,
+      "email": "New@mail.com",
+      "name": "Ivan",
+      "nickname": "raven",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": ""
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 7,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$iABoRAKuFI0m1s6E1oSdZ5$3LFN/eeBckfBqE8eoSiMb6FXWe9mm8Lq73aROSCyWe0=",
+      "last_login": null,
+      "email": "test@gmail.com",
+      "name": "test user",
+      "nickname": "test1",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 60,
+      "lvl": 10,
+      "Picture": null
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 12,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$b2LyP4wmAdfyznExmM1vCh$Wvcsw13xRqtFVRzA9j02wWxLrtMoUuEom2AGNGPF0rI=",
+      "last_login": "2024-12-19T19:52:49.405Z",
+      "email": "superstaff@gmail.com",
+      "name": "superduper",
+      "nickname": "superduper",
+      "is_active": true,
+      "is_admin": true,
+      "is_staff": true,
+      "is_superuser": true,
+      "XP": 0,
+      "lvl": 1,
+      "Picture": "Defaulturl"
+    }
+  },
+  {
+    "model": "usuarios.user",
+    "pk": 13,
+    "fields": {
+      "password": "pbkdf2_sha256$870000$m8OO49vDrxKIeLLIugI1Gh$hucHCWdmSL8N0uUDlyCHg2syLIQZ0TCjYBKzWhXTvRE=",
+      "last_login": null,
+      "email": "usertest@mail.com",
+      "name": "new user testing",
+      "nickname": "usernewnew",
+      "is_active": true,
+      "is_admin": false,
+      "is_staff": false,
+      "is_superuser": false,
+      "XP": 0,
+      "lvl": 0,
+      "Picture": ""
+    }
+  },
+  {
+    "model": "usuarios.course",
+    "pk": 1,
+    "fields": {
+      "user": 4,
+      "title": "Curso de Django",
+      "subject": "Desarrollo Web",
+      "description": "Curso para aprender Django desde cero.",
+      "tag": "computacion"
+    }
+  },
+  {
+    "model": "usuarios.course",
+    "pk": 2,
+    "fields": {
+      "user": 4,
+      "title": "Curso de Django",
+      "subject": "Desarrollo Web",
+      "description": "Curso para aprender Django desde cero.",
+      "tag": "computacion"
+    }
+  },
+  {
+    "model": "usuarios.course",
+    "pk": 3,
+    "fields": {
+      "user": 7,
+      "title": "Uso de python",
+      "subject": "Programaci├│n",
+      "description": "Manejo b├ísico de python",
+      "tag": "computacion"
+    }
+  },
+  {
+    "model": "usuarios.course",
+    "pk": 4,
+    "fields": {
+      "user": 13,
+      "title": "React desde cero",
+      "subject": "React",
+      "description": "curso introductorio a react",
+      "tag": "computacion"
+    }
+  },
+  {
+    "model": "usuarios.course",
+    "pk": 8,
+    "fields": {
+      "user": 7,
+      "title": "Ingenier├¡a de materiales",
+      "subject": "Materiales de construcci├│n",
+      "description": "Curso introductorio a la ingenier├¡a en materiales",
+      "tag": "ingCivil"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 1,
+    "fields": {
+      "course": 1,
+      "title": "prueba New",
+      "description": "Ojala si salga el cambio",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F759dd4b3-fc3b-41db-a8b4-ce5ee242b4cbprueba.mp4?alt=media&token=d326672c-185e-41a2-9cf8-4994524777a9",
+      "uploaded_at": "2024-11-06T02:57:33.787Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 2,
+    "fields": {
+      "course": 1,
+      "title": "Prueba 2",
+      "description": "Esperando cambio",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F08e64c2d-0958-4d02-87ee-401b02d883d5Nueva%20prueba.mp4?alt=media&token=250087f4-8b99-441d-84a7-a50d3444f5a0",
+      "uploaded_at": "2024-11-17T22:42:40.158Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 3,
+    "fields": {
+      "course": 2,
+      "title": "Prueba en curso 2 New Editado",
+      "description": "New video Change Editado",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F4c7fc66d-9a90-4567-9943-c1c00905297dNueva%20prueba.mp4?alt=media&token=d762b09a-7a17-4a60-82d5-7dea9180011e",
+      "uploaded_at": "2024-11-17T22:48:56.964Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 5,
+    "fields": {
+      "course": 2,
+      "title": "Prueba subida 2 Editado",
+      "description": "New Save Editado",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2Fccc0244a-5743-4561-b601-761c9872b4fdprueba.mp4?alt=media&token=ebcf22b4-7fc5-4775-acd4-91381f86a550",
+      "uploaded_at": "2024-11-18T05:30:10.301Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 7,
+    "fields": {
+      "course": 3,
+      "title": "Primer tutorial",
+      "description": "Tutorial de prueba",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2Fcab20441-540c-4935-a590-2e0fe1453a382023-10-01%2013-31-48.mp4?alt=media&token=7536078f-c213-467f-aa7e-a164ba66de0c",
+      "uploaded_at": "2025-01-07T03:23:03.776Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 8,
+    "fields": {
+      "course": 1,
+      "title": "TestNuevo",
+      "description": "Video de prueba",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F02656fdb-2fc3-4591-bcc2-bba4c4922a212023-10-01%2013-31-48.mp4?alt=media&token=01e3bd54-208a-45bf-99ee-f946efd94cb1",
+      "uploaded_at": "2025-01-30T17:26:27.277Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 9,
+    "fields": {
+      "course": 3,
+      "title": "Video Test Nuevo",
+      "description": "Este es un test",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F38f579ca-2ee5-46db-aad9-ca645e0370d12023-10-01%2013-31-48.mp4?alt=media&token=af0a0e20-16ca-44d9-8629-fe169713dd3a",
+      "uploaded_at": "2025-02-12T19:01:10.396Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 10,
+    "fields": {
+      "course": 4,
+      "title": "Video 1",
+      "description": "Primer video del curso",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F3802e6d6-2c61-4fe3-8d47-76a68c440a742023-10-01%2013-31-48.mp4?alt=media&token=d3926d36-fd92-431c-9506-b5458ea16f1e",
+      "uploaded_at": "2025-02-12T19:26:17.304Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 11,
+    "fields": {
+      "course": 8,
+      "title": "Video 2",
+      "description": "Segundo video del curso",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F4409e6d4-d4ef-4868-a45c-64af6bfba2cfterrorist%20win.mp4?alt=media&token=339b787d-d4d7-4c9b-8674-86d026ed158c",
+      "uploaded_at": "2025-04-02T19:02:34.447Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 12,
+    "fields": {
+      "course": 8,
+      "title": "Video 1",
+      "description": "Primer video del curso",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F44c18f15-a883-4368-9f1b-1ffc19b263df2023-10-01%2013-31-48.mp4?alt=media&token=c7557375-2091-4084-82ab-9ad379f4949a",
+      "uploaded_at": "2025-04-02T19:11:12.045Z"
+    }
+  },
+  {
+    "model": "usuarios.video",
+    "pk": 13,
+    "fields": {
+      "course": 8,
+      "title": "Video 3",
+      "description": "Tercer video del curso",
+      "video_url": "https://firebasestorage.googleapis.com/v0/b/reactvideos-291d3.appspot.com/o/videos%2F51b48969-206d-4529-aaf4-f86fc0b76667steam%20countdown.m4v?alt=media&token=d3ec2077-c091-4611-8c82-749497c7020a",
+      "uploaded_at": "2025-04-02T19:12:43.007Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 9,
+    "fields": {
+      "video": 7,
+      "user": 4,
+      "created_at": "2025-01-19T13:38:43.411Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 10,
+    "fields": {
+      "video": 3,
+      "user": 4,
+      "created_at": "2025-01-19T13:56:52.294Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 11,
+    "fields": {
+      "video": 5,
+      "user": 4,
+      "created_at": "2025-01-19T13:56:52.919Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 12,
+    "fields": {
+      "video": 2,
+      "user": 4,
+      "created_at": "2025-01-19T13:57:23.817Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 15,
+    "fields": {
+      "video": 8,
+      "user": 7,
+      "created_at": "2025-02-05T18:38:58.709Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 16,
+    "fields": {
+      "video": 3,
+      "user": 7,
+      "created_at": "2025-02-05T18:39:05.304Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 17,
+    "fields": {
+      "video": 7,
+      "user": 7,
+      "created_at": "2025-02-05T18:39:07.698Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 18,
+    "fields": {
+      "video": 5,
+      "user": 7,
+      "created_at": "2025-02-12T19:17:09.948Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 19,
+    "fields": {
+      "video": 9,
+      "user": 7,
+      "created_at": "2025-02-12T19:17:15.302Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 20,
+    "fields": {
+      "video": 5,
+      "user": 13,
+      "created_at": "2025-02-12T19:26:37.286Z"
+    }
+  },
+  {
+    "model": "usuarios.like",
+    "pk": 21,
+    "fields": {
+      "video": 10,
+      "user": 7,
+      "created_at": "2025-02-12T19:56:02.061Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 1,
+    "fields": {
+      "video": 5,
+      "user": 4,
+      "visited_at": "2025-02-03T21:03:58.250Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 2,
+    "fields": {
+      "video": 3,
+      "user": 7,
+      "visited_at": "2025-02-05T17:43:43.553Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 3,
+    "fields": {
+      "video": 1,
+      "user": 7,
+      "visited_at": "2025-02-05T18:28:40.938Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 4,
+    "fields": {
+      "video": 8,
+      "user": 7,
+      "visited_at": "2025-02-05T18:38:48.243Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 5,
+    "fields": {
+      "video": 2,
+      "user": 7,
+      "visited_at": "2025-02-05T18:38:50.871Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 6,
+    "fields": {
+      "video": 10,
+      "user": 7,
+      "visited_at": "2025-02-12T19:47:38.331Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 7,
+    "fields": {
+      "video": 3,
+      "user": 13,
+      "visited_at": "2025-02-12T19:52:17.247Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 8,
+    "fields": {
+      "video": 5,
+      "user": 13,
+      "visited_at": "2025-02-12T19:52:21.105Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 9,
+    "fields": {
+      "video": 8,
+      "user": 13,
+      "visited_at": "2025-02-12T19:55:34.591Z"
+    }
+  },
+  {
+    "model": "usuarios.history",
+    "pk": 10,
+    "fields": {
+      "video": 5,
+      "user": 7,
+      "visited_at": "2025-03-26T00:47:27.065Z"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 1,
+    "fields": {
+      "user": 7,
+      "video": 3,
+      "created_at": "2025-02-17T17:50:46.194Z",
+      "content": "Esto es un comentario para un video"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 2,
+    "fields": {
+      "user": 7,
+      "video": 3,
+      "created_at": "2025-02-17T17:51:43.925Z",
+      "content": "Esto es otro comentario para un video"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 3,
+    "fields": {
+      "user": 7,
+      "video": 3,
+      "created_at": "2025-02-17T18:05:39.463Z",
+      "content": "Esto es otro comentario para un video"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 4,
+    "fields": {
+      "user": 7,
+      "video": 3,
+      "created_at": "2025-02-17T18:06:38.881Z",
+      "content": "Esto es otro comentario para un video"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 5,
+    "fields": {
+      "user": 7,
+      "video": 3,
+      "created_at": "2025-04-03T19:26:38.233Z",
+      "content": "Esta es una retroalimentaci├│n"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 6,
+    "fields": {
+      "user": 7,
+      "video": 5,
+      "created_at": "2025-04-03T19:27:19.387Z",
+      "content": "nuevo comentario"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 7,
+    "fields": {
+      "user": 7,
+      "video": 5,
+      "created_at": "2025-04-03T19:27:46.672Z",
+      "content": "Comentario Creado"
+    }
+  },
+  {
+    "model": "usuarios.comment",
+    "pk": 8,
+    "fields": {
+      "user": 7,
+      "video": 1,
+      "created_at": "2025-04-04T01:35:52.196Z",
+      "content": "Primer comentario del video"
+    }
+  }
+]
