@@ -3,9 +3,9 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer,CommentSerializer
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer,CommentSerializer,TopicRequestSerializer
 from .filters import CourseFilter
-from .models import Course, Video, User, Like, History,Comment
+from .models import Course, Video, User, Like, History,Comment,TopicRequest
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from django.contrib.auth import authenticate
@@ -409,3 +409,37 @@ class CommentListView(APIView):
         comments = Comment.objects.filter(video = related_video)
         serializer = CommentSerializer(comments,many=True)
         return Response(serializer.data,status=status.HTTP_200_OK)
+
+#------------------SISTEMA DE SOLICITUDES-------------
+
+#view para crear una solicitud
+
+class TopicRequestCreateView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self,request):
+        data = request.data.copy()
+        data['user'] = request.user.id
+        serializer = TopicRequestSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    
+#View para obtener todas las solicitudes
+
+class TopicRequestListView(APIView):
+    def get(self,request):
+        allTopicRequests = TopicRequest.objects.all()
+        serializer = TopicRequestSerializer(allTopicRequests,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
+#View para eliminar una solicitud (desde el frontEnd se ve como "Cerrar solicitud")
+
+class TopicRequestDeleteView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def delete(self,request,topic_id):
+        topic_request = get_object_or_404(TopicRequest,id=topic_id,user=request.user)
+        topic_request.delete()
+        return Response({'message':'Solicitud cerrada correctamente.'},status=status.HTTP_204_NO_CONTENT)

@@ -36,5 +36,10 @@ urlpatterns = [
     #URLS de Comentarios
     path('videos/<int:video_id>/comments/',CommentListView.as_view(),name='getComments'),
     path('videos/<int:video_id>/comments/create',CommentCreateView.as_view(),name='createComment'),
+
+    #URLS de las solicitudes
+    path('topic/request/create',TopicRequestCreateView.as_view(),name='createTopicRequest'),
+    path('topic/request/list/all',TopicRequestListView.as_view(),name='getTopicRequests'),
+    path('topic/request/<int:topic_id>/delete',TopicRequestDeleteView.as_view(),name='deleteTopicRequest'),
     
 ]
