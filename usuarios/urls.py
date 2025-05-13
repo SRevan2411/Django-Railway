@@ -41,5 +41,10 @@ urlpatterns = [
     path('topic/request/create',TopicRequestCreateView.as_view(),name='createTopicRequest'),
     path('topic/request/list/all',TopicRequestListView.as_view(),name='getTopicRequests'),
     path('topic/request/<int:topic_id>/delete',TopicRequestDeleteView.as_view(),name='deleteTopicRequest'),
+
+    #URLS para retornar datos de entrenamiento del microservicio de ia (COMENTAR SI NO SE VA A ENTRENAR LA RED POR SEGURIDAD)
+    path('train/request/history/get/all',HistoryGetAll.as_view(),name='getAllHistoryDATA'),
+    path('train/request/videos/get/all',ResourcesGetAll.as_view(),name='getAllVideosDATA'),
+
     
 ]

@@ -443,3 +443,17 @@ class TopicRequestDeleteView(APIView):
         topic_request = get_object_or_404(TopicRequest,id=topic_id,user=request.user)
         topic_request.delete()
         return Response({'message':'Solicitud cerrada correctamente.'},status=status.HTTP_204_NO_CONTENT)
+
+#Views que se usan para entrenar la ia
+class HistoryGetAll(APIView):
+    def get(self,request):
+        history = History.objects.all()
+        serializer = HistorySerializer(history,many=True)
+        return Response(serializer.data,status=status.HTTP_200_OK)
+
+class ResourcesGetAll(APIView):
+    def get(self,request):
+        videos = Video.objects.all()
+        serializer = ResourceSerializer(videos,many=True,context={'request': request})
+        return Response(serializer.data,status=status.HTTP_200_OK)
+    
