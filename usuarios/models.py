@@ -123,3 +123,12 @@ class Comment(models.Model):
     class Meta:
         ordering = ['created_at']
     
+#Modelo utilizado para las solicitudes de curso o material
+class TopicRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    subject = models.CharField(max_length=100) #Tema
+    content = models.TextField()
+
+    class Meta:
+        ordering = ['created_at']

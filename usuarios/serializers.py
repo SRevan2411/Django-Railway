@@ -2,7 +2,7 @@ from rest_framework import serializers, status
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from .models import User
-from .models import Course, Video, Like, History, Comment
+from .models import Course, Video, Like, History, Comment, TopicRequest
 from firebase_admin import storage
 from datetime import timedelta
 from django.db.models import Count
@@ -73,6 +73,16 @@ class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
         fields = ['id','user','nickname','video','created_at','content']
+    def get_nickname(self,obj):
+        return obj.user.nickname
+
+#Serializador para las solicitudes de curso o material
+class TopicRequestSerializer(serializers.ModelSerializer):
+    nickname = serializers.SerializerMethodField()
+    class Meta:
+        model = TopicRequest
+        fields = ['id','user','nickname','created_at','content','subject']
+
     def get_nickname(self,obj):
         return obj.user.nickname
 
