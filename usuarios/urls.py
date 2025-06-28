@@ -46,5 +46,8 @@ urlpatterns = [
     path('train/request/history/get/all',HistoryGetAll.as_view(),name='getAllHistoryDATA'),
     path('train/request/videos/get/all',ResourcesGetAll.as_view(),name='getAllVideosDATA'),
 
+    #URLS PARA ACTUALIZAR LA XP Y EL NIVEL DEL USUARIO
+    path('user/update/xp',UserSetXpView.as_view(),name='userSetXP'),
+
     
 ]

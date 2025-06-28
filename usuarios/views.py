@@ -457,3 +457,21 @@ class ResourcesGetAll(APIView):
         serializer = ResourceSerializer(videos,many=True,context={'request': request})
         return Response(serializer.data,status=status.HTTP_200_OK)
     
+
+#VIEW PARA AJUSTAR LA EXPERIENCIA Y NIVEL DEL USUARIO
+class UserSetXpView(APIView):
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+    def post(self,request):
+        user = request.user
+        xp_cantidad = request.data.get('cantidad')
+        #Si por algo la cantidad tiene un valor nulo devolvemos un error
+        if xp_cantidad == None:
+            return Response({"error":"Se requere el campo de cantidad"},status = status.HTTP_400_BAD_REQUEST)
+        #Actualizar el nivel del usuario
+        try:
+            xp_cantidad = int(xp_cantidad)
+        except:
+            return Response({"error":"la cantidad no es un dato numerico"},status = status.HTTP_400_BAD_REQUEST)
+        user.update_xp(xp_cantidad)
+        return Response({"message":"experiencia actualizada con exito","experiencia":user.XP,"nivel":user.lvl},status= status.HTTP_200_OK)

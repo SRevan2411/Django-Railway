@@ -66,6 +66,17 @@ class User(AbstractBaseUser):
         """Indica si el usuario tiene permisos para ver una app específica."""
         return True
     
+    #Metodos relacionados con la xp y el nivel del usuario
+    def update_xp(self,cantidad):
+        self.XP += cantidad
+        niveles_subidos = self.XP // 100
+        self.XP = self.XP % 100
+        self.lvl += niveles_subidos
+        self.save(update_fields=['XP','lvl'])
+
+    
+
+    
 #Modelo correspondiente para la tabla de los cursos
 class Course(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
