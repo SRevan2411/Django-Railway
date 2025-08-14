@@ -228,6 +228,28 @@ class VideoListView(generics.ListAPIView):
         ]
         return Response(data, status=200)
     
+#Esto es para obtener los datos de un solo video
+class VideoDetailView(generics.RetrieveAPIView):
+    serializer_class = ResourceSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request, video_id):
+        #checamos si hay un video, y si no pos mandamos un error
+        video = get_object_or_404(Video,id=video_id)
+        #Encapsulamos los datos, no usamos directamente el serializador porque tenemos que juntar el like 
+        user = request.user
+        data = {
+            "id": video.id,
+            "title": video.title,
+            "description": video.description,
+            "liked": Like.objects.filter(video=video, user=user).exists(),
+            "uploaded_at": video.uploaded_at,
+            "video_url": video.video_url,
+        }
+        return Response(data,status=200)
+
+    
 class ResourceUpdateView(generics.UpdateAPIView):
     serializer_class = ResourceSerializer
     authentication_classes = [TokenAuthentication]
