@@ -3,7 +3,7 @@ from rest_framework import status
 from django.http import Http404
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer,CommentSerializer,TopicRequestSerializer
+from .serializers import UserSerializer, CourseSerializer, ResourceSerializer, LikeSerializer, HistorySerializer,CommentSerializer,TopicRequestSerializer, RankingSerializer
 from .filters import CourseFilter
 from .models import Course, Video, User, Like, History,Comment,TopicRequest
 from rest_framework.authtoken.models import Token
@@ -15,6 +15,7 @@ from rest_framework.generics import ListAPIView
 from firebase_admin import storage
 from datetime import timedelta
 from django_filters.rest_framework import DjangoFilterBackend
+from django.db.models import Count
 
 
 # Usuarios --------------------------------------------------------------------------------------
@@ -64,6 +65,16 @@ class UserProfileDetailView(generics.RetrieveAPIView):
     def get_object(self):
         # Devuelve directamente el usuario autenticado
         return self.request.user
+
+class UserRankingView(ListAPIView):
+    serializer_class = RankingSerializer
+    authentication_classes = [TokenAuthentication]
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+        return (
+            User.objects.filter(is_superuser = False).annotate(courses_count=Count('courses')).order_by('-lvl','-XP')
+        )
 # Cursos -------------------------------------------------------------------------------------        
 
 class CourseCreateView(generics.CreateAPIView):

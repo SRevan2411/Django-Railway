@@ -79,7 +79,7 @@ class User(AbstractBaseUser):
     
 #Modelo correspondiente para la tabla de los cursos
 class Course(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # Relación con el usuario
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='courses')  # Relación con el usuario
     title = models.CharField(max_length=255)
     subject = models.CharField(max_length=100) #Tema
     description = models.TextField()

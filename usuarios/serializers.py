@@ -42,6 +42,12 @@ class CourseSerializer(serializers.ModelSerializer):
     def get_nickname(self, obj):
         return obj.user.nickname
 
+class RankingSerializer(serializers.ModelSerializer):
+    courses_count = serializers.IntegerField() #como ese campo no es parte del serializador users, se usa esa función para decirle que se espera agregar con un annotate
+    class Meta:
+        model= User
+        fields = ['id','nickname','lvl','XP','courses_count']
+
 class ResourceSerializer(serializers.ModelSerializer):
     class Meta:
         model = Video

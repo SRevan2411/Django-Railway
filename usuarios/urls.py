@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/',LoginView.as_view(),name='login'),
     path('profile/',GetUserProfileView.as_view(),name='profile'),
     path('user/profile/view/', UserProfileDetailView.as_view(), name='user-profile-detail'),
+    path('users/ranking',UserRankingView.as_view(),name='users-get-ranking'),
     #Cosas de los cursos
     path('courses/create/', CourseCreateView.as_view(), name='course-create'),  # Crear curso
     path('courses/list/', CourseListView.as_view(), name='course-list'),
