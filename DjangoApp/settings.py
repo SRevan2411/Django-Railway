@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'metaudg',  
         'USER': 'postgres',     
         'PASSWORD': 'setpass1234',  
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',  
     }
 }
