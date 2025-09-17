@@ -10,6 +10,8 @@ services:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    networks:
+      - myapp-network
 
   web:
     build: .
@@ -21,6 +23,12 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    networks:
+      - myapp-network
 
 volumes:
   postgres_data:
+
+networks:
+  myapp-network:
+    external: true
