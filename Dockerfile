@@ -13,4 +13,4 @@ COPY . /app/
 EXPOSE 8000
 
 
-CMD sh -c "gunicorn DjangoApp.wsgi:application --bind 0.0.0.0:${PORT:-8000}"
+CMD ["sh", "entrypoint.sh"]
