@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-rcfeh+42j$7g_)g7yfwfq&%2&nug&pf6)m462kb3y1h$pbrb-q
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1", "web"]
 
 
 # Application definition
@@ -87,7 +87,7 @@ DATABASES = {
         'NAME': 'metaudg',  
         'USER': 'postgres',     
         'PASSWORD': 'setpass1234',  
-        'HOST': 'localhost',
+        'HOST': 'db',
         'PORT': '5432',  
     }
 }

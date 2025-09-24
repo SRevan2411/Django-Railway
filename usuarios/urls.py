@@ -7,6 +7,7 @@ urlpatterns = [
     path('login/',LoginView.as_view(),name='login'),
     path('profile/',GetUserProfileView.as_view(),name='profile'),
     path('user/profile/view/', UserProfileDetailView.as_view(), name='user-profile-detail'),
+    path('users/ranking',UserRankingView.as_view(),name='users-get-ranking'),
     #Cosas de los cursos
     path('courses/create/', CourseCreateView.as_view(), name='course-create'),  # Crear curso
     path('courses/list/', CourseListView.as_view(), name='course-list'),
@@ -26,6 +27,7 @@ urlpatterns = [
     path('videos/<int:video_id>/like/', LikeToggleView.as_view(), name='like-toggle'),
     path('videos/<int:video_id>/likes/count/', VideoLikesCountView.as_view(), name='video-likes-count'),
     path('courses/<int:course_id>/likes/count/', CourseLikesCountView.as_view(), name='course-likes-count'),
+    path('videos/<int:video_id>/',VideoDetailView.as_view(),name='video-get-details'),
     
 
     #URLS de Historial
@@ -42,7 +44,7 @@ urlpatterns = [
     path('topic/request/list/all',TopicRequestListView.as_view(),name='getTopicRequests'),
     path('topic/request/<int:topic_id>/delete',TopicRequestDeleteView.as_view(),name='deleteTopicRequest'),
 
-    #URLS para retornar datos de entrenamiento del microservicio de ia (COMENTAR SI NO SE VA A ENTRENAR LA RED POR SEGURIDAD)
+    #URLS para retornar datos de entrenamiento del microservicio de ia (COMENTAR SI NO SE VA A ENTRENAR LA RED, POR SEGURIDAD)
     path('train/request/history/get/all',HistoryGetAll.as_view(),name='getAllHistoryDATA'),
     path('train/request/videos/get/all',ResourcesGetAll.as_view(),name='getAllVideosDATA'),
 
